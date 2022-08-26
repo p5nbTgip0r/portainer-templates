@@ -1,0 +1,52 @@
+services:
+  ${NAME}-nightscout:
+    image: nightscout/cgm-remote-monitor:latest
+    container_name: "${NAME}"
+    restart: "unless-stopped"
+    cpu_percent: 10
+    labels:
+      - "traefik.http.routers.${NAME}-ns.rule=Host(`${HOSTNAME}`)"
+      - "traefik.http.services.${NAME}-ns.loadbalancer.server.port=1337"
+      - "traefik.enable=true"
+    environment:
+      # Core
+      # BASE_URL: ${HOSTNAME}
+      MONGODB_URI: ${MONGODB_URI}
+      API_SECRET: ${API_SECRET}
+      INSECURE_USE_HTTP: 'true'
+
+      # Display
+      DISPLAY_UNITS: ${DISPLAY_UNITS}
+      TIME_FORMAT: ${TIME_FORMAT}
+      THEME: ${THEME}
+      CUSTOM_TITLE: ${CUSTOM_TITLE}
+
+      # Other
+      ALARM_HIGH: '${ALARM_HIGH}'
+      ALARM_LOW: '${ALARM_LOW}'
+      ALARM_TIMEAGO_URGENT: '${ALARM_TIMEAGO_URGENT}'
+      ALARM_TIMEAGO_URGENT_MINS: '${ALARM_TIMEAGO_URGENT_MINS}'
+      ALARM_TIMEAGO_WARN: '${ALARM_TIMEAGO_WARN}'
+      ALARM_TIMEAGO_WARN_MINS: '${ALARM_TIMEAGO_WARN_MINS}'
+      ALARM_TYPES: '${ALARM_TYPES}'
+      ALARM_URGENT_HIGH: '${ALARM_URGENT_HIGH}'
+      ALARM_URGENT_LOW: '${ALARM_URGENT_LOW}'
+      BG_HIGH: '${BG_HIGH}'
+      BG_LOW: '${BG_LOW}'
+      BG_TARGET_BOTTOM: '${BG_TARGET_BOTTOM}'
+      BG_TARGET_TOP: '${BG_TARGET_TOP}'
+      BOLUS_RENDER_OVER: '${BOLUS_RENDER_OVER}'
+      BRIDGE_PASSWORD: '${BRIDGE_PASSWORD}'
+      BRIDGE_SERVER: '${BRIDGE_SERVER}'
+      BRIDGE_USER_NAME: '${BRIDGE_USER_NAME}'
+      ENABLE: '${ENABLE}'
+      MMCONNECT_USER_NAME: '${MMCONNECT_USER_NAME}'
+      MMCONNECT_PASSWORD: '${MMCONNECT_PASSWORD}'
+      MMCONNECT_SERVER: '${MMCONNECT_SERVER}'
+      NIGHT_MODE: '${NIGHT_MODE}'
+      SHOW_PLUGINS: '${SHOW_PLUGINS}'
+      SHOW_RAWBG: '${SHOW_RAWBG}'
+      
+    logging:
+      options:
+        max-size: "1m"

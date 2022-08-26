@@ -1,0 +1,367 @@
+{
+    "version": "2",
+    "templates": [
+        {
+            "type": 3,
+            "title": "Nightscout",
+            "description": "Nightscout",
+            "categories": [
+                "PaaS"
+            ],
+            "platform": "linux",
+            "logo": "",
+            "repository": {
+                "url": "https://github.com/p5nbTgip0r/portainer-templates",
+                "stackfile": "stacks/nightscout/docker-compose.yml"
+            },
+            "env": [
+                {
+                    "name": "VERSION",
+                    "label": "Nightscout version",
+                    "description": "Version of Nightscout to use ('latest' if empty)",
+                    "default": "latest"
+                },
+                {
+                    "name": "NAME",
+                    "label": "Name",
+                    "description": "Name of the docker container"
+                },
+                {
+                    "name": "HOST",
+                    "label": "Hostname",
+                    "description": "Hostname where this Nightscout instance will be reachable (e.g. 'mynightscout.my-server.com')"
+                },
+                {
+                    "name": "MONGODB_URI",
+                    "label": "MongoDB Connection String",
+                    "description": "The MongoDB Connection String to connect to your MongoDB cluster. If you don't have this from MongoDB Atlas, please re-read installation instructions at http://nightscout.github.io/nightscout/new_user/ before continuing"
+                },
+                {
+                    "name": "API_SECRET",
+                    "label": "API_SECRET",
+                    "description": "A passphrase that must be at least 12 characters long. Avoid 'special' characters, which can cause problems in some cases."
+                },
+                {
+                    "name": "TIME_FORMAT",
+                    "label": "TIME_FORMAT",
+                    "description": "Default setting for new browser views, for the time mode.",
+                    "select": [
+                        {
+                            "text": "12-hour",
+                            "value": "12",
+                            "default": true
+                        },
+                        {
+                            "text": "24-hour",
+                            "value": "24"
+                        }
+                    ]
+                },
+                {
+                    "name": "DISPLAY_UNITS",
+                    "label": "DISPLAY_UNITS",
+                    "description": "Preferred BG units for the site.",
+                    "select": [
+                        {
+                            "text": "mg/dL",
+                            "value": "mg/dl",
+                            "default": true
+                        },
+                        {
+                            "text": "mmol/L",
+                            "value": "mmol/L"
+                        }
+                    ]
+                },
+                {
+                    "name": "ENABLE",
+                    "label": "ENABLE",
+                    "description": "Plugins to enable for your site. Must be a space-delimited, lower-case list. Include the word 'bridge' here if you are receiving data from the Dexcom Share service. Include 'mmconnect' if you are bridging from the MiniMed CareLink service.",
+                    "default": "careportal basal dbsize"
+                },
+                {
+                    "name": "SHOW_PLUGINS",
+                    "label": "SHOW_PLUGINS",
+                    "description": "Default setting for whether or not these plugins are checked (active) by default, not merely enabled. Include plugins here as in the ENABLE line; space-separated and lower-case.",
+                    "default": "careportal dbsize"
+                },
+                {
+                    "name": "BRIDGE_PASSWORD",
+                    "label": "BRIDGE_PASSWORD",
+                    "description": "Your Dexcom account password, to receive CGM data from the Dexcom Share service. Also make sure to include 'bridge' in your ENABLE line.",
+                    "default": ""
+                },
+                {
+                    "name": "BRIDGE_SERVER",
+                    "label": "BRIDGE_SERVER",
+                    "description": "If you are bridging from the Dexcom Share service, and are anywhere *outside* the US, change this to EU.",
+                    "select": [
+                        {
+                            "text": "US",
+                            "value": "US",
+                            "default": true
+                        },
+                        {
+                            "text": "EU",
+                            "value": "EU"
+                        }
+                    ]
+                },
+                {
+                    "name": "BRIDGE_USER_NAME",
+                    "label": "BRIDGE_USER_NAME",
+                    "description": "Your Dexcom account username, to receive CGM data from the Dexcom Share service. Also make sure to include 'bridge' in your ENABLE line.",
+                    "default": ""
+                },
+                {
+                    "name": "MMCONNECT_USER_NAME",
+                    "label": "MMCONNECT_USER_NAME",
+                    "description": "Your CareLink account username, to receive CGM data from the CareLink service. Also make sure to include 'mmconnect' in your ENABLE line.",
+                    "default": ""
+                },
+                {
+                    "name": "MMCONNECT_PASSWORD",
+                    "label": "MMCONNECT_PASSWORD",
+                    "description": "Your CareLink account password, to receive CGM data from the CareLink service. Also make sure to include 'mmconnect' in your ENABLE line.",
+                    "default": ""
+                },
+                {
+                    "name": "MMCONNECT_SERVER",
+                    "label": "MMCONNECT_SERVER",
+                    "description": "If you are bridging from the CareLink service, and are anywhere *outside* the US, change this to EU.",
+                    "select": [
+                        {
+                            "text": "US",
+                            "value": "US",
+                            "default": true
+                        },
+                        {
+                            "text": "EU",
+                            "value": "EU"
+                        }
+                    ]
+                },
+                {
+                    "name": "CUSTOM_TITLE",
+                    "label": "CUSTOM_TITLE",
+                    "description": "The display name for the Nightscout site. Appears in the upper left of the main view. Often set to the name of the CGM wearer.",
+                    "default": ""
+                },
+                {
+                    "name": "THEME",
+                    "label": "THEME",
+                    "description": "Default setting for new browser views, for the color theme of the CGM graph.",
+                    "select": [
+                        {
+                            "text": "Default",
+                            "value": "default",
+                            "default": true
+                        },
+                        {
+                            "text": "Colors",
+                            "value": "colors"
+                        },
+                        {
+                            "text": "Colorblind-friendly",
+                            "value": "colorblindfriendly"
+                        }
+                    ]
+                },
+                {
+                    "name": "ALARM_HIGH",
+                    "label": "ALARM_HIGH",
+                    "description": "Default setting for new browser views, for the High alarm (triggered when BG crosses BG_TARGET_TOP). ('on' or 'off')",
+                    "select": [
+                        {
+                            "text": "Off",
+                            "value": "off",
+                        },
+                        {
+                            "text": "On",
+                            "value": "on",
+                            "default": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ALARM_LOW",
+                    "label": "ALARM_LOW",
+                    "description": "Default setting for new browser views, for the Low alarm (triggered when BG crosses BG_TARGET_BOTTOM). ('on' or 'off')",
+                    "select": [
+                        {
+                            "text": "Off",
+                            "value": "off",
+                        },
+                        {
+                            "text": "On",
+                            "value": "on",
+                            "default": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ALARM_TIMEAGO_URGENT",
+                    "label": "ALARM_TIMEAGO_URGENT",
+                    "description": "Default setting for new browser views, for an urgent alarm when CGM data hasn't been received in the number of minutes set in ALARM_TIMEAGO_URGENT_MINS. ('on' or 'off')",
+                    "select": [
+                        {
+                            "text": "Off",
+                            "value": "off",
+                        },
+                        {
+                            "text": "On",
+                            "value": "on",
+                            "default": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ALARM_TIMEAGO_URGENT_MINS",
+                    "label": "ALARM_TIMEAGO_URGENT_MINS",
+                    "description": "Default setting for new browser views, for the number of minutes since the last CGM reading to trigger an ALARM_TIMEAGO_URGENT alarm.",
+                    "default": "30"
+                },
+                {
+                    "name": "ALARM_TIMEAGO_WARN",
+                    "label": "ALARM_TIMEAGO_WARN",
+                    "description": "Default setting for new browser views, for a warning alarm when CGM data hasn't been received in the number of minutes set in ALARM_TIMEAGO_WARN_MINS. ('on' or 'off')",
+                    "select": [
+                        {
+                            "text": "Off",
+                            "value": "off",
+                        },
+                        {
+                            "text": "On",
+                            "value": "on",
+                            "default": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ALARM_TIMEAGO_WARN_MINS",
+                    "label": "ALARM_TIMEAGO_WARN_MINS",
+                    "description": "Default setting for new browser views, for the number of minutes since the last CGM reading to trigger an ALARM_TIMEAGO_WARN alarm.",
+                    "default": "15"
+                },
+                {
+                    "name": "ALARM_TYPES",
+                    "label": "ALARM_TYPES",
+                    "description": "'simple' and/or 'predict'. Simple alarms trigger when BG crosses the various thresholds set below. Predict alarms use a formula that forecasts where the BG is going based on its trend. You will *not* get warnings when crossing the BG thresholds set below when using the predict type.",
+                    "select": [
+                        {
+                            "text": "Simple",
+                            "value": "simple",
+                            "default": true
+                        },
+                        {
+                            "text": "Predict",
+                            "value": "predict"
+                        },
+                        {
+                            "text": "Simple & Predict",
+                            "value": "simple predict"
+                        }
+                    ]
+                },
+                {
+                    "name": "ALARM_URGENT_HIGH",
+                    "label": "ALARM_URGENT_HIGH",
+                    "description": "Default setting for new browser views, for the Urgent High alarm (triggered when BG crosses BG_HIGH). ('on' or 'off')",
+                    "select": [
+                        {
+                            "text": "Off",
+                            "value": "off",
+                        },
+                        {
+                            "text": "On",
+                            "value": "on",
+                            "default": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ALARM_URGENT_LOW",
+                    "label": "ALARM_URGENT_LOW",
+                    "description": "Default setting for new browser views, for the Urgent Low alarm (triggered when BG crosses BG_LOW). ('on' or 'off')",
+                    "select": [
+                        {
+                            "text": "Off",
+                            "value": "off",
+                        },
+                        {
+                            "text": "On",
+                            "value": "on",
+                            "default": true
+                        }
+                    ]
+                },
+                {
+                    "name": "BG_HIGH",
+                    "label": "BG_HIGH",
+                    "description": "Urgent High BG threshold, triggers the ALARM_URGENT_HIGH alarm. Set in mg/dL or mmol/L, as set in DISPLAY_UNITS variable.",
+                    "default": "260"
+                },
+                {
+                    "name": "BG_LOW",
+                    "label": "BG_LOW",
+                    "description": "Urgent Low BG threshold, triggers the ALARM_URGENT_LOW alarm. Set in mg/dL or mmol/L, as set in DISPLAY_UNITS variable.",
+                    "default": "55"
+                },
+                {
+                    "name": "BG_TARGET_BOTTOM",
+                    "label": "BG_TARGET_BOTTOM",
+                    "description": "Low BG threshold, triggers the ALARM_LOW alarm. Set in mg/dL or mmol/L, as set in DISPLAY_UNITS variable.",
+                    "default": "80"
+                },
+                {
+                    "name": "BG_TARGET_TOP",
+                    "label": "BG_TARGET_TOP",
+                    "description": "High BG threshold, triggers the ALARM_HIGH alarm. Set in mg/dL or mmol/L, as set in DISPLAY_UNITS variable.",
+                    "default": "180"
+                },
+                {
+                    "name": "BOLUS_RENDER_OVER",
+                    "label": "BOLUS_RENDER_OVER",
+                    "description": "U value over which the bolus values are rendered on the chart if the 'x U and Over' option is selected.",
+                    "default": "1"
+                },
+                {
+                    "name": "NIGHT_MODE",
+                    "label": "NIGHT_MODE",
+                    "description": "Default setting for new browser views, for whether Night Mode should be enabled.",
+                    "select": [
+                        {
+                            "text": "Off",
+                            "value": "off",
+                            "default": true
+                        },
+                        {
+                            "text": "On",
+                            "value": "on"
+                        }
+                    ]
+                },
+                {
+                    "name": "SHOW_RAWBG",
+                    "label": "SHOW_RAWBG",
+                    "description": "Default setting for new browser views, for the display of raw CGM data (if available).",
+                    "select": [
+                        {
+                            "text": "Never",
+                            "value": "never",
+                            "default": true
+                        },
+                        {
+                            "text": "Noise",
+                            "value": "noise"
+                        },
+                        {
+                            "text": "Always",
+                            "value": "always"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
