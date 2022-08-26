@@ -1,6 +1,6 @@
 services:
-  ${NAME}-nightscout:
-    image: nightscout/cgm-remote-monitor:latest
+  nightscout:
+    image: nightscout/cgm-remote-monitor:${VERSION}
     container_name: "${NAME}"
     restart: "unless-stopped"
     cpu_percent: 10
