@@ -174,7 +174,7 @@
                     "select": [
                         {
                             "text": "Off",
-                            "value": "off",
+                            "value": "off"
                         },
                         {
                             "text": "On",
@@ -190,7 +190,7 @@
                     "select": [
                         {
                             "text": "Off",
-                            "value": "off",
+                            "value": "off"
                         },
                         {
                             "text": "On",
@@ -206,7 +206,7 @@
                     "select": [
                         {
                             "text": "Off",
-                            "value": "off",
+                            "value": "off"
                         },
                         {
                             "text": "On",
@@ -228,7 +228,7 @@
                     "select": [
                         {
                             "text": "Off",
-                            "value": "off",
+                            "value": "off"
                         },
                         {
                             "text": "On",
@@ -270,7 +270,7 @@
                     "select": [
                         {
                             "text": "Off",
-                            "value": "off",
+                            "value": "off"
                         },
                         {
                             "text": "On",
@@ -286,7 +286,7 @@
                     "select": [
                         {
                             "text": "Off",
-                            "value": "off",
+                            "value": "off"
                         },
                         {
                             "text": "On",
