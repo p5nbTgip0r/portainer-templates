@@ -2,35 +2,19 @@
     "version": "2",
     "templates": [
         {
-            "type": 3,
+            "type": 1,
             "title": "Nightscout",
             "description": "Nightscout",
-            "categories": [
-                "PaaS"
-            ],
             "platform": "linux",
-            "logo": "",
-            "repository": {
-                "url": "https://github.com/p5nbTgip0r/portainer-templates",
-                "stackfile": "stacks/nightscout/docker-compose.yml"
-            },
+            "image": "nightscout/cgm-remote-monitor:latest",
+            "restart_policy": "unless-stopped",
+            "labels": [
+                { "name": "traefik.enable", "value": "true" },
+                { "name": "traefik.http.routers.NAME-ns.rule", "value": "Host(`NAME.DOMAIN.COM`)" },
+                { "name": "traefik.http.services.NAME-ns.loadbalancer.server.port", "value": "1337" },
+                { "name": "traefik.http.routers.NAME-ns.entrypoints", "value": "web-secure" }
+            ],
             "env": [
-                {
-                    "name": "VERSION",
-                    "label": "Nightscout version",
-                    "description": "Version of Nightscout to use ('latest' if empty)",
-                    "default": "latest"
-                },
-                {
-                    "name": "NAME",
-                    "label": "Name",
-                    "description": "Name of the docker container"
-                },
-                {
-                    "name": "HOST",
-                    "label": "Hostname",
-                    "description": "Hostname where this Nightscout instance will be reachable (e.g. 'mynightscout.my-server.com')"
-                },
                 {
                     "name": "MONGODB_URI",
                     "label": "MongoDB Connection String",
